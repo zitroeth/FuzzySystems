@@ -1,5 +1,4 @@
 # FuzzySystems
 To use:
-1. Open dist folder
-2. Run cmd on dist directory
+1. Run cmd on dist directory (open dist folder, click directory, enter "cmd")
 3. type java -jar OrtizFuzzySystems
