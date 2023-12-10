@@ -733,6 +733,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldC3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="high"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelC">
               <Properties>
@@ -765,10 +768,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPaneB2" min="-2" pref="279" max="-2" attributes="0"/>
+                          <Component id="jButtonF" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButtonF" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                               <Component id="jButtonFCalculate" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="jLabelFZ" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldFZ" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -913,12 +919,15 @@
                                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jComboBoxFY3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonF" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonFCalculate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelFZ" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldFZ" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jScrollPaneB2" min="-2" pref="248" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonF" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -1017,6 +1026,7 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="showGrid" type="boolean" value="true"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -1242,6 +1252,13 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFCalculateActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelFZ">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="z:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldFZ">
             </Component>
           </SubComponents>
         </Container>

@@ -10,6 +10,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ChartFrame;
+import java.lang.Float;
 
 /**
  *
@@ -99,6 +100,8 @@ public class Main extends javax.swing.JFrame {
         jComboBoxFCon3 = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jButtonFCalculate = new javax.swing.JButton();
+        jLabelFZ = new javax.swing.JLabel();
+        jTextFieldFZ = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -371,6 +374,8 @@ public class Main extends javax.swing.JFrame {
 
         jLabelC3.setText("C3 Name:");
 
+        jTextFieldC3.setText("high");
+
         jLabelC.setText("Set C Name:");
 
         jTextFieldC.setText("risk");
@@ -458,6 +463,7 @@ public class Main extends javax.swing.JFrame {
                 "", "C1", "C2", "C3"
             }
         ));
+        jTableF.setEnabled(false);
         jTableF.setShowGrid(true);
         jScrollPaneB2.setViewportView(jTableF);
 
@@ -538,6 +544,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabelFZ.setText("z:");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -546,10 +554,13 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneB2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonF)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButtonF)
-                        .addGap(76, 76, 76)
-                        .addComponent(jButtonFCalculate)))
+                        .addComponent(jButtonFCalculate)
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabelFZ)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldFZ, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -658,10 +669,13 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel8)
                             .addComponent(jComboBoxFY3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonF)
-                            .addComponent(jButtonFCalculate)))
+                            .addComponent(jButtonFCalculate)
+                            .addComponent(jLabelFZ)
+                            .addComponent(jTextFieldFZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPaneB2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonF)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(50, 50, 50))
         );
@@ -832,14 +846,14 @@ public class Main extends javax.swing.JFrame {
     private void jButtonFCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFCalculateActionPerformed
         float x = Integer.parseInt(jTextFieldFX.getText());
         float y = Integer.parseInt(jTextFieldFY.getText());
-        
-        calculateTableData(x,y, jComboBoxFX1.getSelectedItem().toString(), jComboBoxFY1.getSelectedItem().toString(), jComboBoxFCon1.getSelectedItem().toString(), "C1");
-        calculateTableData(x,y, jComboBoxFX2.getSelectedItem().toString(), jComboBoxFY2.getSelectedItem().toString(), jComboBoxFCon2.getSelectedItem().toString(), "C2");
-        calculateTableData(x,y, jComboBoxFX3.getSelectedItem().toString(), jComboBoxFY3.getSelectedItem().toString(), jComboBoxFCon3.getSelectedItem().toString(), "C3");
+
+        calculateTableData(x, y, jComboBoxFX1.getSelectedItem().toString(), jComboBoxFY1.getSelectedItem().toString(), jComboBoxFCon1.getSelectedItem().toString(), "C1");
+        calculateTableData(x, y, jComboBoxFX2.getSelectedItem().toString(), jComboBoxFY2.getSelectedItem().toString(), jComboBoxFCon2.getSelectedItem().toString(), "C2");
+        calculateTableData(x, y, jComboBoxFX3.getSelectedItem().toString(), jComboBoxFY3.getSelectedItem().toString(), jComboBoxFCon3.getSelectedItem().toString(), "C3");
     }//GEN-LAST:event_jButtonFCalculateActionPerformed
 
     private void calculateTableData(float x, float y, String rule_x, String rule_y, String rule_con, String rule_z) {
-        float shade_x = 0, shade_y = 0, shade_f;
+        float shade_x = 0, shade_y = 0, shade_f, numerator=0, denominator=0, z;
 
         switch (rule_x) {
             case "A1":
@@ -892,6 +906,24 @@ public class Main extends javax.swing.JFrame {
                     break;
             }
         }
+        
+        for (int i = 0; i < jTableF.getRowCount(); i++) {
+            float highest_val=0, curr_val, curr_zero;
+            curr_zero = Float.parseFloat(jTableF.getModel().getValueAt(i, 0).toString());
+            
+            for (int j = 1; j <= 3; j++) {
+                curr_val = Float.parseFloat(jTableF.getModel().getValueAt(i, j).toString());
+                if (Float.compare(curr_val, highest_val) > 0) {
+                    highest_val = curr_val;
+                }
+            }
+            numerator += (curr_zero*highest_val);
+            denominator += highest_val;
+            System.out.println(numerator+"\n"+denominator+"\n\n");
+        }
+        z = numerator / denominator;
+        System.out.println(z);
+        jTextFieldFZ.setText(String.format("%.2f",z));
     }
 
     /**
@@ -967,6 +999,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelC3;
     private javax.swing.JLabel jLabelFX;
     private javax.swing.JLabel jLabelFY;
+    private javax.swing.JLabel jLabelFZ;
     private javax.swing.JLabel jLabelFrules;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -995,5 +1028,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldC3;
     private javax.swing.JTextField jTextFieldFX;
     private javax.swing.JTextField jTextFieldFY;
+    private javax.swing.JTextField jTextFieldFZ;
     // End of variables declaration//GEN-END:variables
 }
