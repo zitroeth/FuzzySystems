@@ -1,4 +1,5 @@
 # FuzzySystems
+Requirements:
+JDK 20.0.1 +
 To use:
-1. Run cmd on dist directory (open dist folder, click directory, enter "cmd")
-3. type java -jar OrtizFuzzySystems
+1. Click jar file on dist directory (or type "java -jar OrtizFuzzySystems" on cmd)
